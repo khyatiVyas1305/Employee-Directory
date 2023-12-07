@@ -7,3 +7,23 @@
 
 import SwiftUI
 
+final class EmployeeListViewModel: ObservableObject {
+    private let service: EmployeeServiceType
+    @Published private(set) var employees: [Employee] = []
+    @Published private(set) var isLoading: Bool = false
+    
+    init(service: EmployeeServiceType = EmployeeServices()) {
+        self.service = service
+    }
+    
+    @MainActor
+    func fetchEmployees() async {
+        do{
+            isLoading = true
+            employees = try await service.fetchEmployees()
+            isLoading = false
+        }catch{
+            print("Error: \(error)")
+        }
+    }
+}

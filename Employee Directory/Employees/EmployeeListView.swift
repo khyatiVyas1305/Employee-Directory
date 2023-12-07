@@ -11,23 +11,51 @@ struct EmployeeListView: View {
     
     //REMEMBER TO CHANGE THIS TO FALSE TO GET ONBOARDING BACK
     @AppStorage("onboardingRequired") var onboardingRequired: Bool = false
+    @ObservedObject var viewModel: EmployeeListViewModel
+    init( viewModel: EmployeeListViewModel = EmployeeListViewModel()) {
+        self.viewModel = viewModel
+    }
     
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
+        NavigationStack{
+            if viewModel.isLoading{
+                ProgressView("Hang tight! Fetching Employee list...")
+                    .progressViewStyle(CircularProgressViewStyle())
+            }else{
+                listViewContent
+            }
+        }
+        .onAppear(){
+            Task{
+                await viewModel.fetchEmployees()
+            }
         }
         .fullScreenCover(isPresented: $onboardingRequired, onDismiss:{
             onboardingRequired = false
         }, content: {
             OnbordingView(onboardingRequired: $onboardingRequired)
         })
-//        .sheet(isPresented: $onboardingRequired, onDismiss:{ onboardingRequired = false
-//        }, content:{
-//            OnbordingView(onboardingRequired: $onboardingRequired)
-//        })
+    }
+    
+    //All the list view code will go here.
+    @ViewBuilder
+    var listViewContent: some View{
+        List(viewModel.employees){ employee in
+            NavigationLink {
+                Text("Hello")
+            }label: {
+                AsyncImage(url: URL(string: employee.photo_url_small)){ image in
+                    image
+                        .image?.resizable()
+                        .scaledToFit()
+                        .frame(width: 50, height: 50)
+                        .clipShape(Circle())
+                }
+                Text(employee.full_name)
+            }
+        }
+        .navigationTitle("Employees")
+        .listStyle(.insetGrouped)
     }
 }
 
