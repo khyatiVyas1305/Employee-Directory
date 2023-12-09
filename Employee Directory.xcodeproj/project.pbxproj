@@ -14,6 +14,7 @@
 		6CA6691C2B21543100F884B3 /* DataModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CA6691B2B21543100F884B3 /* DataModels.swift */; };
 		6CA6691E2B2162B200F884B3 /* EmployeeServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CA6691D2B2162B200F884B3 /* EmployeeServices.swift */; };
 		6CA669222B22532C00F884B3 /* EmployeeListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CA669212B22532C00F884B3 /* EmployeeListViewModel.swift */; };
+		6CA669242B22A61F00F884B3 /* EmployeeDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CA669232B22A61F00F884B3 /* EmployeeDetailView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -25,6 +26,7 @@
 		6CA6691B2B21543100F884B3 /* DataModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataModels.swift; sourceTree = "<group>"; };
 		6CA6691D2B2162B200F884B3 /* EmployeeServices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmployeeServices.swift; sourceTree = "<group>"; };
 		6CA669212B22532C00F884B3 /* EmployeeListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmployeeListViewModel.swift; sourceTree = "<group>"; };
+		6CA669232B22A61F00F884B3 /* EmployeeDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmployeeDetailView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -80,6 +82,7 @@
 			children = (
 				6CA6690B2B2112ED00F884B3 /* EmployeeListView.swift */,
 				6CA669212B22532C00F884B3 /* EmployeeListViewModel.swift */,
+				6CA669232B22A61F00F884B3 /* EmployeeDetailView.swift */,
 			);
 			path = Employees;
 			sourceTree = "<group>";
@@ -173,6 +176,7 @@
 				6CA6691C2B21543100F884B3 /* DataModels.swift in Sources */,
 				6CA669222B22532C00F884B3 /* EmployeeListViewModel.swift in Sources */,
 				6CA6691E2B2162B200F884B3 /* EmployeeServices.swift in Sources */,
+				6CA669242B22A61F00F884B3 /* EmployeeDetailView.swift in Sources */,
 				6CA6690C2B2112ED00F884B3 /* EmployeeListView.swift in Sources */,
 				6CA6690A2B2112ED00F884B3 /* Employee_DirectoryApp.swift in Sources */,
 			);

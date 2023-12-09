@@ -29,6 +29,7 @@ struct EmployeeListView: View {
             Task{
                 await viewModel.fetchEmployees()
             }
+            
         }
         .fullScreenCover(isPresented: $onboardingRequired, onDismiss:{
             onboardingRequired = false
@@ -40,9 +41,9 @@ struct EmployeeListView: View {
     //All the list view code will go here.
     @ViewBuilder
     var listViewContent: some View{
-        List(viewModel.employees){ employee in
+        List(viewModel.employeeResults){ employee in
             NavigationLink {
-                Text("Hello")
+                EmployeeDetailView(employee: employee)
             }label: {
                 AsyncImage(url: URL(string: employee.photo_url_small)){ image in
                     image
@@ -51,10 +52,23 @@ struct EmployeeListView: View {
                         .frame(width: 50, height: 50)
                         .clipShape(Circle())
                 }
-                Text(employee.full_name)
+                VStack(spacing: 0){
+                    Text(employee.full_name)
+                        .bold()
+                    Text(employee.team)
+                        .foregroundStyle(.gray)
+                }.padding(.all, 0)
+                
             }
         }
         .navigationTitle("Employees")
+        .searchable(text: $viewModel.searchTerm,
+                    placement: .navigationBarDrawer(displayMode: .automatic),
+                    prompt: "Search for Employees")
+        .onChange(of: viewModel.searchTerm){ _, n in
+            print("search: \(n)")
+            viewModel.filterSearchResults()
+        }
         .listStyle(.insetGrouped)
     }
 }
