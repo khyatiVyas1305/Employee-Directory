@@ -9,33 +9,48 @@ import SwiftUI
 
 struct EmployeeListView: View {
     
-    //REMEMBER TO CHANGE THIS TO FALSE TO GET ONBOARDING BACK
-    @AppStorage("onboardingRequired") var onboardingRequired: Bool = false
+    
+    @AppStorage("onboardingRequired") var onboardingRequired: Bool = true
     @ObservedObject var viewModel: EmployeeListViewModel
+    @State private var selectedTab = 0
+    
     init( viewModel: EmployeeListViewModel = EmployeeListViewModel()) {
         self.viewModel = viewModel
     }
     
     var body: some View {
-        NavigationStack{
-            if viewModel.isLoading{
-                ProgressView("Hang tight! Fetching Employee list...")
-                    .progressViewStyle(CircularProgressViewStyle())
-            }else{
-                listViewContent
+        
+        TabView{
+            NavigationStack{
+                if viewModel.isLoading{
+                    ProgressView("Hang tight! Fetching Employee list...")
+                        .progressViewStyle(CircularProgressViewStyle())
+                }else{
+                    listViewContent
+                }
             }
-        }
-        .onAppear(){
-            Task{
-                await viewModel.fetchEmployees()
+            .fullScreenCover(isPresented: $onboardingRequired, onDismiss:{
+                onboardingRequired = false
+            }, content: {
+                OnbordingView(onboardingRequired: $onboardingRequired)
+            })
+            .onAppear(){
+                Task{
+                    await viewModel.fetchEmployees()
+                }
+                
             }
+            .tabItem {
+                Label("Employees", systemImage: "person.3")
+            }
+            .tag(0)
             
+            SettingsView()
+            .tabItem{
+                Label("Settings", systemImage: "gear")
+            }
+            .tag(1)
         }
-        .fullScreenCover(isPresented: $onboardingRequired, onDismiss:{
-            onboardingRequired = false
-        }, content: {
-            OnbordingView(onboardingRequired: $onboardingRequired)
-        })
     }
     
     //All the list view code will go here.
@@ -60,6 +75,9 @@ struct EmployeeListView: View {
                 }.padding(.all, 0)
                 
             }
+        }
+        .refreshable {
+           await viewModel.fetchEmployees()
         }
         .navigationTitle("Employees")
         .searchable(text: $viewModel.searchTerm,

@@ -9,7 +9,7 @@ import SwiftUI
 
 struct SettingsView: View {
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        Text("This page is to demo settings tab.\nThis Employee app fetches employee details from an API. You can see the list, details and refresh the list.")
     }
 }
 
