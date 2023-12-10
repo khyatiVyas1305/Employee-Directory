@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct EmployeeDetailView: View {
-   
+    
     var employee: Employee
     var body: some View {
         VStack{
@@ -33,7 +33,7 @@ struct EmployeeDetailView: View {
                 .font(.headline)
                 .fontDesign(.rounded)
                 .foregroundStyle(.brown)
-                
+            
             HStack{
                 Text(employee.employee_type.rawValue)
                     .foregroundStyle(.white)
@@ -46,7 +46,7 @@ struct EmployeeDetailView: View {
             .padding(.trailing,160)
             .padding(.top,5)
             VStack{
-            
+                
                 HStack{
                     Image(systemName: "envelope.circle.fill")
                         .foregroundStyle(.primary)
@@ -70,13 +70,13 @@ struct EmployeeDetailView: View {
                 .padding(.top,5)
                 
             }
-                
+            
             Spacer()
             Spacer()
             Spacer()
             Spacer()
             
-             
+            
         }
     }
 }

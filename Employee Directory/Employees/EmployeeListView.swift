@@ -46,10 +46,10 @@ struct EmployeeListView: View {
             .tag(0)
             
             SettingsView()
-            .tabItem{
-                Label("Settings", systemImage: "gear")
-            }
-            .tag(1)
+                .tabItem{
+                    Label("Settings", systemImage: "gear")
+                }
+                .tag(1)
         }
     }
     
@@ -77,7 +77,7 @@ struct EmployeeListView: View {
             }
         }
         .refreshable {
-           await viewModel.fetchEmployees()
+            await viewModel.fetchEmployees()
         }
         .navigationTitle("Employees")
         .searchable(text: $viewModel.searchTerm,
@@ -95,6 +95,7 @@ struct EmployeeListView: View {
     EmployeeListView()
 }
 
+//Onbording code
 struct OnbordingView: View {
     @Binding var onboardingRequired: Bool
     var body: some View {
